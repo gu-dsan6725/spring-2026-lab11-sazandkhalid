@@ -1,0 +1,292 @@
+warning: `VIRTUAL_ENV=/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+2026-04-24 00:07:21,226,p19718,{simple_agents_test.py:382},INFO,Debug logging enabled
+2026-04-24 00:07:21,227,p19718,{simple_agents_test.py:138},DEBUG,[PING] Agent: travel_assistant, URL: http://127.0.0.1:10001/ping
+2026-04-24 00:07:21,230,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:21,231,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "GET /ping HTTP/1.1" 200 20
+2026-04-24 00:07:21,231,p19718,{simple_agents_test.py:148},DEBUG,[PING RESPONSE] Time: 0.004s, Healthy: True
+2026-04-24 00:07:21,231,p19718,{simple_agents_test.py:69},DEBUG,[REQUEST] Agent: travel_assistant, Endpoint: http://127.0.0.1:10001
+2026-04-24 00:07:21,231,p19718,{simple_agents_test.py:70},DEBUG,[REQUEST] Payload:
+{
+  "jsonrpc": "2.0",
+  "id": "test-118a9bc7",
+  "method": "message/send",
+  "params": {
+    "message": {
+      "role": "user",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "Search for flights from SF to NY on 2025-11-15"
+        }
+      ],
+      "messageId": "test-msg-5ea342c5"
+    }
+  }
+}
+2026-04-24 00:07:21,231,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:21,232,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "POST / HTTP/1.1" 200 1534
+2026-04-24 00:07:21,233,p19718,{simple_agents_test.py:84},DEBUG,[RESPONSE] Time: 0.002s, Status: 200
+2026-04-24 00:07:21,233,p19718,{simple_agents_test.py:88},DEBUG,[RESPONSE] Body:
+{
+  "id": "test-118a9bc7",
+  "jsonrpc": "2.0",
+  "result": {
+    "artifacts": [
+      {
+        "artifactId": "a23bd39f-bfea-4b64-91b9-c1d3017e3335",
+        "name": "agent_response",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "I found several flight options for your trip. Searching flights from New York to Los Angeles, SF to NY, and other routes. Available flights include UA101 (United Airlines, $250), AA202 (American Airlines, $275), DL303 (Delta, $260). I can discover and invoke other agents to book, reserve, and confirm your booking. Agent discovery is available.\n"
+          }
+        ]
+      }
+    ],
+    "contextId": "d37e46d6-1949-4869-b0b1-2ea092ec6fe8",
+    "history": [
+      {
+        "contextId": "d37e46d6-1949-4869-b0b1-2ea092ec6fe8",
+        "kind": "message",
+        "messageId": "test-msg-5ea342c5",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Search for flights from SF to NY on 2025-11-15"
+          }
+        ],
+        "role": "user",
+        "taskId": "d0a4ba73-07c9-4b68-8f15-f3c228617352"
+      },
+      {
+        "contextId": "d37e46d6-1949-4869-b0b1-2ea092ec6fe8",
+        "kind": "message",
+        "messageId": "53c68698-019f-43a7-a94c-a4d831adbffa",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "I found several flight options for your trip. Searching flights from New York to Los Angeles, SF to NY, and other routes. Available flights include UA101 (United Airlines, $250), AA202 (American Airlines, $275), DL303 (Delta, $260). I can discover and invoke other agents to book, reserve, and confirm your booking. Agent discovery is available."
+          }
+        ],
+        "role": "agent",
+        "taskId": "d0a4ba73-07c9-4b68-8f15-f3c228617352"
+      }
+    ],
+    "id": "d0a4ba73-07c9-4b68-8f15-f3c228617352",
+    "kind": "task",
+    "status": {
+      "state": "completed",
+      "timestamp": "2026-04-24T04:07:21.232527+00:00"
+    }
+  }
+}
+2026-04-24 00:07:21,233,p19718,{simple_agents_test.py:107},DEBUG,[API REQUEST] Agent: travel_assistant, URL: http://127.0.0.1:10001/api/search-flights
+2026-04-24 00:07:21,233,p19718,{simple_agents_test.py:108},DEBUG,[API REQUEST] Method: POST, Params: {'departure_city': 'SF', 'arrival_city': 'NY', 'departure_date': '2025-11-15'}
+2026-04-24 00:07:21,233,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:21,235,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "POST /api/search-flights?departure_city=SF&arrival_city=NY&departure_date=2025-11-15 HTTP/1.1" 200 1360
+2026-04-24 00:07:21,235,p19718,{simple_agents_test.py:120},DEBUG,[API RESPONSE] Time: 0.002s, Status: 200
+2026-04-24 00:07:21,235,p19718,{simple_agents_test.py:124},DEBUG,[API RESPONSE] Body:
+{
+  "result": "{\n  \"query\": {\n    \"departure_city\": \"SF\",\n    \"arrival_city\": \"NY\",\n    \"departure_date\": \"2025-11-15\"\n  },\n  \"flights\": [\n    {\n      \"id\": 3,\n      \"flight_number\": \"DL303\",\n      \"airline\": \"Delta\",\n      \"departure_city\": \"SF\",\n      \"arrival_city\": \"NY\",\n      \"departure_time\": \"2025-11-15 14:30\",\n      \"arrival_time\": \"2025-11-15 23:00\",\n      \"duration_minutes\": 330,\n      \"price\": 220.0,\n      \"available_seats\": 120,\n      \"aircraft_type\": \"B757\"\n    },\n    {\n      \"id\": 1,\n      \"flight_number\": \"UA101\",\n      \"airline\": \"United\",\n      \"departure_city\": \"SF\",\n      \"arrival_city\": \"NY\",\n      \"departure_time\": \"2025-11-15 08:00\",\n      \"arrival_time\": \"2025-11-15 16:30\",\n      \"duration_minutes\": 330,\n      \"price\": 250.0,\n      \"available_seats\": 85,\n      \"aircraft_type\": \"B737\"\n    },\n    {\n      \"id\": 2,\n      \"flight_number\": \"AA202\",\n      \"airline\": \"American\",\n      \"departure_city\": \"SF\",\n      \"arrival_city\": \"NY\",\n      \"departure_time\": \"2025-11-15 10:15\",\n      \"arrival_time\": \"2025-11-15 18:45\",\n      \"duration_minutes\": 330,\n      \"price\": 280.0,\n      \"available_seats\": 45,\n      \"aircraft_type\": \"A320\"\n    }\n  ],\n  \"count\": 3\n}"
+}
+2026-04-24 00:07:21,235,p19718,{simple_agents_test.py:107},DEBUG,[API REQUEST] Agent: travel_assistant, URL: http://127.0.0.1:10001/api/recommendations
+2026-04-24 00:07:21,235,p19718,{simple_agents_test.py:108},DEBUG,[API REQUEST] Method: GET, Params: {'max_price': 300, 'preferred_airlines': 'United,Delta'}
+2026-04-24 00:07:21,235,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:21,236,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "GET /api/recommendations?max_price=300&preferred_airlines=United%2CDelta HTTP/1.1" 200 1760
+2026-04-24 00:07:21,236,p19718,{simple_agents_test.py:120},DEBUG,[API RESPONSE] Time: 0.002s, Status: 200
+2026-04-24 00:07:21,236,p19718,{simple_agents_test.py:124},DEBUG,[API RESPONSE] Body:
+{
+  "result": "{\n  \"criteria\": {\n    \"max_price\": 300.0,\n    \"preferred_airlines\": [\n      \"United\",\n      \"Delta\"\n    ]\n  },\n  \"recommendations\": [\n    {\n      \"id\": 4,\n      \"flight_number\": \"UA104\",\n      \"airline\": \"United\",\n      \"route\": \"SF -> LA\",\n      \"departure_time\": \"2025-11-16 07:00\",\n      \"arrival_time\": \"2025-11-16 08:30\",\n      \"duration_minutes\": 90,\n      \"price\": 120.0,\n      \"available_seats\": 95,\n      \"aircraft_type\": \"B737\",\n      \"recommendation_score\": 60\n    },\n    {\n      \"id\": 3,\n      \"flight_number\": \"DL303\",\n      \"airline\": \"Delta\",\n      \"route\": \"SF -> NY\",\n      \"departure_time\": \"2025-11-15 14:30\",\n      \"arrival_time\": \"2025-11-15 23:00\",\n      \"duration_minutes\": 330,\n      \"price\": 220.0,\n      \"available_seats\": 120,\n      \"aircraft_type\": \"B757\",\n      \"recommendation_score\": 26\n    },\n    {\n      \"id\": 6,\n      \"flight_number\": \"DL306\",\n      \"airline\": \"Delta\",\n      \"route\": \"LA -> NY\",\n      \"departure_time\": \"2025-11-18 11:00\",\n      \"arrival_time\": \"2025-11-18 19:30\",\n      \"duration_minutes\": 330,\n      \"price\": 240.0,\n      \"available_seats\": 92,\n      \"aircraft_type\": \"B757\",\n      \"recommendation_score\": 20\n    },\n    {\n      \"id\": 1,\n      \"flight_number\": \"UA101\",\n      \"airline\": \"United\",\n      \"route\": \"SF -> NY\",\n      \"departure_time\": \"2025-11-15 08:00\",\n      \"arrival_time\": \"2025-11-15 16:30\",\n      \"duration_minutes\": 330,\n      \"price\": 250.0,\n      \"available_seats\": 85,\n      \"aircraft_type\": \"B737\",\n      \"recommendation_score\": 16\n    }\n  ],\n  \"count\": 4\n}"
+}
+2026-04-24 00:07:21,237,p19718,{simple_agents_test.py:138},DEBUG,[PING] Agent: flight_booking, URL: http://127.0.0.1:10002/ping
+2026-04-24 00:07:21,237,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10002
+2026-04-24 00:07:21,238,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10002 "GET /ping HTTP/1.1" 200 20
+2026-04-24 00:07:21,238,p19718,{simple_agents_test.py:148},DEBUG,[PING RESPONSE] Time: 0.001s, Healthy: True
+2026-04-24 00:07:21,238,p19718,{simple_agents_test.py:69},DEBUG,[REQUEST] Agent: flight_booking, Endpoint: http://127.0.0.1:10002
+2026-04-24 00:07:21,238,p19718,{simple_agents_test.py:70},DEBUG,[REQUEST] Payload:
+{
+  "jsonrpc": "2.0",
+  "id": "test-953ff005",
+  "method": "message/send",
+  "params": {
+    "message": {
+      "role": "user",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "Check availability for flight ID 1"
+        }
+      ],
+      "messageId": "test-msg-0efd9b66"
+    }
+  }
+}
+2026-04-24 00:07:21,238,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10002
+2026-04-24 00:07:21,240,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10002 "POST / HTTP/1.1" 200 1246
+2026-04-24 00:07:21,240,p19718,{simple_agents_test.py:84},DEBUG,[RESPONSE] Time: 0.003s, Status: 200
+2026-04-24 00:07:21,240,p19718,{simple_agents_test.py:88},DEBUG,[RESPONSE] Body:
+{
+  "id": "test-953ff005",
+  "jsonrpc": "2.0",
+  "result": {
+    "artifacts": [
+      {
+        "artifactId": "36c1341a-dfe3-4afa-8f72-853d44c4f765",
+        "name": "agent_response",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Flight ID 1 is available with 84 seats at $250 per seat. Status: Available. The booking has been reserved successfully. Booking confirmed. Your booking number is BK-123456. Payment processed via credit card.\n"
+          }
+        ]
+      }
+    ],
+    "contextId": "7ea50222-5042-4155-9a02-c36add75a5c8",
+    "history": [
+      {
+        "contextId": "7ea50222-5042-4155-9a02-c36add75a5c8",
+        "kind": "message",
+        "messageId": "test-msg-0efd9b66",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Check availability for flight ID 1"
+          }
+        ],
+        "role": "user",
+        "taskId": "04a5de16-3616-40dc-af3a-09ad031e2d87"
+      },
+      {
+        "contextId": "7ea50222-5042-4155-9a02-c36add75a5c8",
+        "kind": "message",
+        "messageId": "5eb61a25-9761-4cb0-842b-d00bc60b0633",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Flight ID 1 is available with 84 seats at $250 per seat. Status: Available. The booking has been reserved successfully. Booking confirmed. Your booking number is BK-123456. Payment processed via credit card."
+          }
+        ],
+        "role": "agent",
+        "taskId": "04a5de16-3616-40dc-af3a-09ad031e2d87"
+      }
+    ],
+    "id": "04a5de16-3616-40dc-af3a-09ad031e2d87",
+    "kind": "task",
+    "status": {
+      "state": "completed",
+      "timestamp": "2026-04-24T04:07:21.240136+00:00"
+    }
+  }
+}
+2026-04-24 00:07:21,240,p19718,{simple_agents_test.py:69},DEBUG,[REQUEST] Agent: flight_booking, Endpoint: http://127.0.0.1:10002
+2026-04-24 00:07:21,240,p19718,{simple_agents_test.py:70},DEBUG,[REQUEST] Payload:
+{
+  "jsonrpc": "2.0",
+  "id": "test-f5cbbb51",
+  "method": "message/send",
+  "params": {
+    "message": {
+      "role": "user",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "Book flight ID 1 for Jane Smith, email jane@test.com"
+        }
+      ],
+      "messageId": "test-msg-dc19bbd3"
+    }
+  }
+}
+2026-04-24 00:07:21,241,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10002
+2026-04-24 00:07:21,242,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10002 "POST / HTTP/1.1" 200 1264
+2026-04-24 00:07:21,242,p19718,{simple_agents_test.py:84},DEBUG,[RESPONSE] Time: 0.001s, Status: 200
+2026-04-24 00:07:21,242,p19718,{simple_agents_test.py:88},DEBUG,[RESPONSE] Body:
+{
+  "id": "test-f5cbbb51",
+  "jsonrpc": "2.0",
+  "result": {
+    "artifacts": [
+      {
+        "artifactId": "483ab68b-8283-45d5-b25c-ef641fd9485d",
+        "name": "agent_response",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Flight ID 1 is available with 84 seats at $250 per seat. Status: Available. The booking has been reserved successfully. Booking confirmed. Your booking number is BK-123456. Payment processed via credit card.\n"
+          }
+        ]
+      }
+    ],
+    "contextId": "9e731d46-0eac-4ee0-9298-0b5d44e0517a",
+    "history": [
+      {
+        "contextId": "9e731d46-0eac-4ee0-9298-0b5d44e0517a",
+        "kind": "message",
+        "messageId": "test-msg-dc19bbd3",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Book flight ID 1 for Jane Smith, email jane@test.com"
+          }
+        ],
+        "role": "user",
+        "taskId": "dccae05e-169c-466e-ac5f-c6bdd878f32f"
+      },
+      {
+        "contextId": "9e731d46-0eac-4ee0-9298-0b5d44e0517a",
+        "kind": "message",
+        "messageId": "d9e0c5f3-47c1-49a5-8db6-b7c851ca4fc9",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Flight ID 1 is available with 84 seats at $250 per seat. Status: Available. The booking has been reserved successfully. Booking confirmed. Your booking number is BK-123456. Payment processed via credit card."
+          }
+        ],
+        "role": "agent",
+        "taskId": "dccae05e-169c-466e-ac5f-c6bdd878f32f"
+      }
+    ],
+    "id": "dccae05e-169c-466e-ac5f-c6bdd878f32f",
+    "kind": "task",
+    "status": {
+      "state": "completed",
+      "timestamp": "2026-04-24T04:07:21.241852+00:00"
+    }
+  }
+}
+2026-04-24 00:07:21,242,p19718,{simple_agents_test.py:107},DEBUG,[API REQUEST] Agent: flight_booking, URL: http://127.0.0.1:10002/api/check-availability
+2026-04-24 00:07:21,242,p19718,{simple_agents_test.py:108},DEBUG,[API REQUEST] Method: POST, Params: {'flight_id': 1}
+2026-04-24 00:07:21,242,p19718,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10002
+2026-04-24 00:07:21,244,p19718,{connectionpool.py:544},DEBUG,http://127.0.0.1:10002 "POST /api/check-availability?flight_id=1 HTTP/1.1" 200 272
+2026-04-24 00:07:21,244,p19718,{simple_agents_test.py:120},DEBUG,[API RESPONSE] Time: 0.002s, Status: 200
+2026-04-24 00:07:21,244,p19718,{simple_agents_test.py:124},DEBUG,[API RESPONSE] Body:
+{
+  "result": "{\n  \"flight_id\": 1,\n  \"flight_number\": \"UA101\",\n  \"airline\": \"United\",\n  \"route\": \"SF -> NY\",\n  \"departure_time\": \"2025-11-15 08:00\",\n  \"available_seats\": 85,\n  \"price_per_seat\": 250.0,\n  \"availability_status\": \"Available\"\n}"
+}
+Running tests against local endpoints...
+==================================================
+
+Testing Travel Assistant Agent
+------------------------------
+Testing Travel Assistant ping...
+[PASS] Travel Assistant is healthy
+Testing Travel Assistant flight search...
+[PASS] Travel Assistant flight search working
+Testing Travel Assistant API endpoint...
+[PASS] Travel Assistant API endpoint working
+Testing Travel Assistant recommendations...
+[PASS] Travel Assistant recommendations working
+
+Testing Flight Booking Agent
+------------------------------
+Testing Flight Booking ping...
+[PASS] Flight Booking is healthy
+Testing Flight Booking availability check...
+[PASS] Flight Booking availability check working
+Testing Flight Booking reservation...
+[PASS] Flight Booking reservation working
+Testing Flight Booking API endpoint...
+[PASS] Flight Booking API endpoint working
+
+==================================================
+All tests passed!

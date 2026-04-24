@@ -1,0 +1,23 @@
+warning: `VIRTUAL_ENV=/opt/homebrew/opt/python@3.14/Frameworks/Python.framework/Versions/3.14` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+2026-04-24 00:07:32,778,p19736,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:32,781,p19736,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "POST / HTTP/1.1" 200 1548
+2026-04-24 00:07:32,781,p19736,{connectionpool.py:241},DEBUG,Starting new HTTP connection (1): 127.0.0.1:10001
+2026-04-24 00:07:32,782,p19736,{connectionpool.py:544},DEBUG,http://127.0.0.1:10001 "POST / HTTP/1.1" 200 1742
+Running agent discovery and booking workflow tests...
+======================================================================
+Test 1: Travel agent searches for flights (solo)
+Test 2: Travel agent discovers booking agent and completes booking
+======================================================================
+
+1. Testing flight search (travel agent solo)...
+   [PASS] Travel agent searched for flights using its own tools
+   Response preview: I found several flight options for your trip. Searching flights from New York to Los Angeles, SF to NY, and other routes. Available flights include UA101 (United Airlines, $250), AA202 (American Airli...
+
+2. Testing flight booking with agent discovery...
+      [PASS] Booking agent discovered and invoked
+   Response preview: I found several flight options for your trip. Searching flights from New York to Los Angeles, SF to NY, and other routes. Available flights include UA101 (United Airlines, $250), AA202 (American Airli...
+   [PASS] Complete booking workflow succeeded
+
+======================================================================
+All tests passed!
+======================================================================

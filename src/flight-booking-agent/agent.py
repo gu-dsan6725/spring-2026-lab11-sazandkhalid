@@ -1,16 +1,57 @@
 """Flight Booking Agent - Main application module."""
 
 import logging
+import os
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from typing import Any
 
 import uvicorn
+from dotenv import load_dotenv
+from strands.models.litellm import LiteLLMModel
+from strands.types.streaming import StreamEvent
+from strands.types.tools import ToolChoice, ToolSpec
+
+load_dotenv()
+
+
+class MockModel(LiteLLMModel):
+    """Mock model that returns fixed responses without API calls."""
+
+    def __init__(self, mock_text: str, **kwargs: Any) -> None:
+        super().__init__(model_id="anthropic/claude-sonnet-4-5-20250929")
+        self._mock_text = mock_text
+
+    async def stream(
+        self,
+        messages: Any,
+        tool_specs: list[ToolSpec] | None = None,
+        system_prompt: str | None = None,
+        *,
+        tool_choice: ToolChoice | None = None,
+        system_prompt_content: Any = None,
+        **kwargs: Any,
+    ) -> AsyncGenerator[StreamEvent, None]:
+        yield {"messageStart": {"role": "assistant"}}
+        yield {"contentBlockStart": {"start": {}}}
+        yield {"contentBlockDelta": {"delta": {"text": self._mock_text}}}
+        yield {"contentBlockStop": {}}
+        yield {"messageStop": {"stopReason": "end_turn"}}
+
+
+BOOKING_MOCK_RESPONSE = (
+    "Flight ID 1 is available with 84 seats at $250 per seat. "
+    "Status: Available. The booking has been reserved successfully. "
+    "Booking confirmed. Your booking number is BK-123456. "
+    "Payment processed via credit card."
+)
+
 from dependencies import (
     get_db_manager,
     get_env,
 )
 from fastapi import FastAPI
 from strands import Agent
-from strands.models.litellm import LiteLLMModel
 from strands.multiagent.a2a import A2AServer
 from tools import (
     FLIGHT_BOOKING_TOOLS,
@@ -31,7 +72,10 @@ logger = logging.getLogger(__name__)
 
 # LiteLLM model identifier for Anthropic Claude
 MODEL_ID = "anthropic/claude-sonnet-4-5-20250929"
-litellm_model = LiteLLMModel(model_id=MODEL_ID)
+if os.getenv("MOCK_LLM"):
+    litellm_model = MockModel(mock_text=BOOKING_MOCK_RESPONSE)
+else:
+    litellm_model = LiteLLMModel(model_id=MODEL_ID)
 
 strands_agent = Agent(
     name="Flight Booking Agent",
